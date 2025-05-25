@@ -1,0 +1,96 @@
+import { useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+
+const projects = [
+  {
+    title: 'Cinematic Travel Edit',
+    description: 'A travel montage with cinematic transitions and color grading.',
+    video: 'https://www.example.com/video1.mp4',
+  },
+  {
+    title: 'Social Media Promo',
+    description: 'Fast-paced promo video for Instagram and TikTok.',
+    video: 'https://www.example.com/video2.mp4',
+  },
+];
+
+export default function Portfolio() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="bg-white text-black font-sans">
+      {/* Header */}
+      <header className="p-6 flex justify-between items-center border-b">
+        <h1 className="text-2xl font-bold">My Portfolio</h1>
+        <nav className="space-x-4">
+          <a href="#about" className="hover:underline">About</a>
+          <a href="#projects" className="hover:underline">Projects</a>
+          <a href="#contact" className="hover:underline">Contact</a>
+        </nav>
+      </header>
+
+      {/* Hero Section */}
+      <section className="h-screen flex items-center justify-center text-center p-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 1 }}
+        >
+          <h2 className="text-4xl md:text-6xl font-bold mb-4">Crafting Edits that Captivate</h2>
+          <p className="text-lg md:text-xl text-gray-600 max-w-xl mx-auto">Specializing in cinematic edits, social media content, and storytelling for creators, brands, and filmmakers.</p>
+        </motion.div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 px-4 max-w-4xl mx-auto">
+        <h3 className="text-3xl font-bold mb-6">About Me</h3>
+        <p className="text-gray-700 leading-relaxed">
+          I'm a passionate video editor with a sharp eye for storytelling and rhythm. I blend creativity with technical precision to deliver edits that engage, inspire, and convert. Whether it's short-form social media clips or cinematic narratives, I tailor each project to resonate with its audience.
+        </p>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-20 px-4 bg-gray-100">
+        <h3 className="text-3xl font-bold mb-12 text-center">Projects</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {projects.map((project, index) => (
+            <motion.div 
+              key={index} 
+              className="rounded-xl overflow-hidden shadow-lg bg-white"
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.3 }}
+            >
+              <video controls className="w-full h-64 object-cover">
+                <source src={project.video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div className="p-4">
+                <h4 className="text-xl font-semibold mb-2">{project.title}</h4>
+                <p className="text-gray-600">{project.description}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 px-4 max-w-3xl mx-auto text-center">
+        <h3 className="text-3xl font-bold mb-6">Contact</h3>
+        <p className="text-gray-700 mb-4">Reach out for collaborations, freelance work, or just to connect.</p>
+        <div className="flex justify-center space-x-6 text-2xl">
+          <a href="https://github.com/yourprofile" aria-label="GitHub" className="hover:text-gray-500"><FaGithub /></a>
+          <a href="https://linkedin.com/in/yourprofile" aria-label="LinkedIn" className="hover:text-blue-600"><FaLinkedin /></a>
+          <a href="mailto:youremail@example.com" aria-label="Email" className="hover:text-red-600"><FaEnvelope /></a>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="text-center text-sm text-gray-500 p-4 border-t">
+        &copy; {new Date().getFullYear()} Your Name. All rights reserved.
+      </footer>
+    </div>
+  );
+}
